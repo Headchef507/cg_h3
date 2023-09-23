@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Fallandi punktar</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+uniform float time;
+attribute vec4 vPosition;
+varying vec4 v_color; 
+
+void main()
+{
+	gl_PointSize = 3.0;
+    vec4 tpos = vPosition;
+
+    tpos.y = 1.0 - mod(0.0015*time + tpos.y+1.0, 2.0);
+
+    if(tpos.y < 0.0){
+        if(tpos.x < 0.5 && tpos.x > -0.5 && tpos.y > -0.15){
+            v_color= vec4(0.0, 0.0, 0.0, 0.0);
+        }
+        else if(tpos.x < 0.45 && tpos.x > -0.45 && tpos.y > -0.30){
+            v_color= vec4(0.0, 0.0, 0.0, 0.0);
+        }
+        else if(tpos.x < 0.38 && tpos.x > -0.38 && tpos.y > -0.38){
+            v_color= vec4(0.0, 0.0, 0.0, 0.0);
+        }
+        else if(tpos.x < 0.30 && tpos.x > -0.30 && tpos.y > -0.45){
+            v_color= vec4(0.0, 0.0, 0.0, 0.0);
+        }
+        else if(tpos.x < 0.25 && tpos.x > -0.25 && tpos.y > -0.5){
+            v_color= vec4(0.0, 0.0, 0.0, 0.0);
+        }
+        else{
+            v_color= vec4(1.0, 0.0, 0.0, 1.0);
+        }
+    }
+    else if(tpos.x < 0.25 && tpos.x > -0.25 && tpos.y < 0.5){
+        v_color= vec4(1.0, 0.0, 0.0, 1.0);
+    }
+    else if(tpos.x < 0.3 && tpos.x > -0.3 && tpos.y < 0.45){
+        v_color= vec4(1.0, 0.0, 0.0, 1.0);
+    }
+    else if(tpos.x < 0.38 && tpos.x > -0.38 && tpos.y < 0.38){
+        v_color= vec4(1.0, 0.0, 0.0, 1.0);
+    }
+    else if(tpos.x < 0.45 && tpos.x > -0.45 && tpos.y < 0.3){
+        v_color= vec4(1.0, 0.0, 0.0, 1.0);
+    }
+    else if(tpos.x < 0.5 && tpos.x > -0.5&& tpos.y < 0.25){
+        v_color= vec4(1.0, 0.0, 0.0, 1.0);
+    }
+    else{
+        v_color= vec4(0.0, 0.0, 0.0, 0.0);
+    }
+
+    gl_Position = tpos;
+    
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 v_color;
+
+void main()
+{
+    gl_FragColor = v_color;
+}
+</script>
+
+<script type="text/javascript" src="./Common/webgl-utils.js"></script>
+<script type="text/javascript" src="./Common/initShaders.js"></script>
+<script type="text/javascript" src="./Common/MV.js"></script>
+<script type="text/javascript" src="fallingPoints.js"></script>
+</head>
+
+<body>
+<canvas id="gl-canvas" width="600" height="600">
+</body>
+</html>
